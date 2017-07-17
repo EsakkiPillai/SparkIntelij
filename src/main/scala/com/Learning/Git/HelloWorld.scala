@@ -9,8 +9,10 @@ object   HelloWorld {
   def main(args: Array[String]): Unit = {
 
     println("Hello Esakki Welcome To Scala Agains")
-    println("============================================"
+    println("============================================")
     println("Welcome To Spark")
+
+    println("Welcome to Spark Streaming")
 
   }
 
