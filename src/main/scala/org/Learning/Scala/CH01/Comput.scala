@@ -2,6 +2,10 @@ package org.Learning.Scala.CH01
 
 /**
   * Created by etpil on 7/17/2017.
+  * All The Functions and Variables  are Static
+  * Objects are Singleton Classes
+  * We can't pass arguments to objects
+  * File Name and Object Name need not to be same
   * we are going to compute computation from  the  Below ncr = n!/( (n-r)! * r1)
   */
 object Comput {

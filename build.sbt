@@ -27,10 +27,10 @@ libraryDependencies += "org.apache.spark" % "spark-streaming-flume-sink_2.10" % 
 
 libraryDependencies += "org.apache.spark" % "spark-streaming-kafka_2.10" % "1.6.3"
 
-
 //mysql Connector Dependency
 libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.36"
 
 // kafka Client for custom Prodcer and Consumer
 // https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients
-libraryDependencies += "org.apache.kafka" % "kafka-clients" % "0.9.0.2.4.2.12-1"
+//libraryDependencies += "org.apache.kafka" % "kafka-clients" % "0.9.0.2.4.2.12-1"
+
