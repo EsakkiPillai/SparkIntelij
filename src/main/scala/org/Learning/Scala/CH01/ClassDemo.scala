@@ -5,7 +5,7 @@ package org.Learning.Scala.CH01
   * We can Create A class as Below
   *
   */
-class Departments( departmentId :Int ,departmentName :String)
+class Departmentssrc( departmentId :Int ,departmentName :String)
 
 /*
 if we create the class as above we will get only Constructor ,it has Java Int and Java String
@@ -26,6 +26,15 @@ object ClassDemo {
   def main(args: Array[String]): Unit = {
     val d = new Departmentsbkp(1,"HR")
     println("DepartmentName is "+d.departmentName)
+
+    println("Object Values are "+d)
+/*
+  In Scala we have Class Hierarchy ,
+
+
+ */
+    // Ite Above Line Return "Object Values are org.Learning.Scala.CH01.Departmentsbkp@5cb9f472" but we need to Display the  original data so that we have to overwrite the toString metod
+
 
   }
 }
