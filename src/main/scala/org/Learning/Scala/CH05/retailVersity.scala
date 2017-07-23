@@ -1,4 +1,4 @@
-package org.Learning.Scala.CH01.CH05
+package org.Learning.Scala.CH05
 
 /**
   * Created by etpil on 7/18/2017.
@@ -25,8 +25,7 @@ class Category(
     "," +
     categoryDepartmentId +
     "," +
-    categoryName
-
+    categoryName +
   ")"
 }
 
