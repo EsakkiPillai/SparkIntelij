@@ -1,0 +1,178 @@
+fractios = nummerator / denominator
+
+create a Fraction example ad Print it as nummerator/denominator
+
+Collections
+-------------
+scala> val a = 1 to 100
+a: scala.collection.immutable.Range.Inclusive = Range(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100)
+
+scala>  1 to 50 by 10
+res0: scala.collection.immutable.Range = Range(1, 11, 21, 31, 41)
+
+
+get even number and get square of the number and get sum of those number
+
+scala> var sum =0
+sum: Int = 0
+
+scala> for( e <- 2 to 20 by 2){
+     |  sum =sum + (e*e)
+     | }
+
+scala>
+
+scala> sum
+res6: Int = 1540
+
+
+to Write in More  Functional Way
+
+scala> (1 to 20).filter (x => x%2 ==0).map(rec=> rec*rec)
+res7: scala.collection.immutable.IndexedSeq[Int] = Vector(4, 16, 36, 64, 100, 144, 196, 256, 324, 400)
+
+scala> (1 to 20).filter (x => x%2 ==0).map(rec=> rec*rec).reduce( (total,ele) =>total+ele)
+res8: Int = 1540
+
+
+here tot will be Created Globally and it will be maintained seperately 
+
+all the above will be executed in parallel
+
+Traversable is a trait with Functionality of common actions which means its a kind of hetrogenous element so that we can iterate
+
+
+scala> val t:Traversable[Int] =  Traversable(1,2,3)
+t: Traversable[Int] = List(1, 2, 3)
+
+scala> t.
+++             foldLeft             par                 take
+++:            foldRight            partition           takeWhile
+/:             forall               product             to
+:\             foreach              reduce              toArray
+WithFilter     genericBuilder       reduceLeft          toBuffer
+addString      groupBy              reduceLeftOption    toIndexedSeq
+aggregate      hasDefiniteSize      reduceOption        toIterable
+collect        head                 reduceRight         toIterator
+collectFirst   headOption           reduceRightOption   toList
+companion      init                 repr                toMap
+copyToArray    inits                scan                toSeq
+copyToBuffer   isEmpty              scanLeft            toSet
+count          isTraversableAgain   scanRight           toStream
+drop           last                 seq                 toString
+dropWhile      lastOption           size                toTraversable
+exists         map                  slice               toVector
+filter         max                  span                transpose
+filterNot      maxBy                splitAt             unzip
+find           min                  stringPrefix        unzip3
+flatMap        minBy                sum                 view
+flatten        mkString             tail                withFilter
+fold           nonEmpty             tails
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+scala Collections mutable and immutable
+
+elements in the mutable will be updated eventhough it is val or var
+
+LIST is IMMUTABLE we cant update it.
+
+scala> val a = Array(1,2,3,4,5)
+a: Array[Int] = Array(1, 2, 3, 4, 5)
+
+scala> a(0)
+res0: Int = 1
+
+scala> a(0) =100
+
+scala> a
+res2: Array[Int] = Array(100, 2, 3, 4, 5)
+
+
+we didnt  leave val concept we cant assign any newArray to the value a 
+
+scala> a= Array(3,5,6,7)
+<console>:12: error: reassignment to val
+       a= Array(3,5,6,7)
+        ^
+
+scala>
+
+class such as Array Vector implements the IndexedSeq and class such as List implements Linearseq
+
+Plesae check the  types
+scala> val a = List ( "Esak" ,"sankar","eskki" ,"Rocho")
+a: List[String] = List(Esak, sankar, eskki, Rocho)
+
+scala> val a1  = List ( 1,68457,3.5 ,"esakki","CG")
+a1: List[Any] = List(1, 68457, 3.5, esakki, CG)
+
+its because of class hierarchy
+
+Reduce will work in parallel reduceLeft will work in sequential
+
+
+Cehck Min and Max using Reduce
+
+get the count of completed orders 
+
+os.filter(x=> x.orderStatus =="COMPLETE").length
+
+scala> case class orders( f:Int , status:String )
+defined class orders
+
+scala> val os = List (
+     | orders(1,"COMPLETED"),
+     | orders(2,"COMPLETED") ,
+     | orders(3,"CLOSED")
+     | )
+os: List[orders] = List(orders(1,COMPLETED), orders(2,COMPLETED), orders(3,CLOSED))
+
+scala> os.reduce((len,ele) => len+1)
+<console>:15: error: type mismatch;
+ found   : Int(1)
+ required: String
+       os.reduce((len,ele) => len+1)
+ 
+ In Here we cant add the integer to the Orders (len) so thats y we get the above error                               ^
+ so we have to change it to int  and then we need to add it 
+
+scala> os.filter( p => p.status =="COMPLETED").map(f => 1).reduce ((len,ele) => len+1)
+res3: Int = 2
+
+scala> os.filter( p => p.status =="COMPLETED").map(f => 1)
+res4: List[Int] = List(1, 1)
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
