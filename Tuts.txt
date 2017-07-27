@@ -253,7 +253,160 @@ val (_ , sec , thr) = tup      sec: Double = 1.23 thr: String = Esak    // here 
 
 
 
+==============================================================================================================================================================
 
+classes in scala 
+
+syntax
+
+class point (val x:Double,val y :Double){
+
+  def move (dx:Double ,dy:Double) = new point(x+dx , y+dy )
+  def distanceFromOrigin =  math.sqrt(x*x + y*y)
+  override def toString = f"${x} ,${y}"
+}
+
+val p = new point(3,4)  //Tis get printed by the toString Method  p: point = 3.0 ,4.0
+p.move(10,20)  //res0: point = 13.0 ,24.0
+p.distanceFromOrigin
+p.x    //3.0
+p.y    //res3: Double = 4.0
+
+
+it has 3 methods move ,distanceFromOrigin ,toString
+it has 2 instance varaiables x , y
+	
+the toString method is overriden from the base class. we ahve to use the keyword as override as above
+all the scala class are extend java.lang object which has a toString method
+
+
+if the method doesnt take any parantheses we dont need to give the parantheses in mtod calling or metod definition
+
+	p.distanceFromOrigin       => user doesn't understood whether its a method or variables
+
+the instance variable can be accessed inside the class
+
+p.x
+p.y
+
+since p.x is val we can't mutate it means we can't reassign variables to it.
+ p.x  and p.y are used to read the results not to mutate it
+
+
+if we want mutable variable we have to declare it as  var 
+
+class point(var x:Double , var y:Double)
+
+now we can change the values to p.x 
+
+there are also private val and var variables
+
+class bankaccount {
+
+private var balance =0.0
+}
+
+-----------------------
+Lets consider the  below class 
+
+class point (val x :Double ,val y :Double) {
+
+	def this() { this(0,0) }
+	----
+	}
+	
+from the above statemet we have two constructor
+primary  => Any Variable we are define inside the parantheses became the constructor
+auxillary =>  we can have n of auxiliary constructor it should have the name of this and it should call   
+ 	
+
+class point (val x:Double,val y :Double){
+
+  println("Welcometo the Point(%f,%f)".format(x,y))
+  .....
+  
+  }
+  
+  when ever we create it the message will get printed. so if we need any  additional work to be done we have toinclude it in the class body 
+  
+  
+ Point  class equivalent java classes are as below
+scala> :javap -p point
+Compiled from "<console>"
+public class point {
+  private final double x;                  we decalre the variable x as val 
+  private final double y;
+  public double x();                       getter metod for variable x 
+  public double y();
+  public point move(double, double);        user created "move" metod
+  public double distanceFromOrigin();       user created method
+  public java.lang.String toString();        toString Method
+  public point(double, double);             constructor
+  
+}
+
+
+point class with auxiliary constructor
+
+
+scala> class point (val x:Double,val y :Double){
+     |   def this() { this(0,0)}
+     |   println("Welcometo the Point(%f,%f)".format(x,y))
+     |   def move (dx:Double ,dy:Double) = new point(x+dx , y+dy )
+     |   def distanceFromOrigin =  math.sqrt(x*x + y*y)
+     |   override def toString = f"${x} ,${y}"
+     | }
+defined class point
+
+scala> :javap -p point
+Compiled from "<console>"
+public class point {
+  private final double x;
+  private final double y;
+  public double x();
+  public double y();
+  public point move(double, double);
+  public double distanceFromOrigin();
+  public java.lang.String toString();
+  public point(double, double);
+  public point();
+}
+
+
+
+
+
+how come p.x and p.distanceFromOrigin differs with each other?
+
+we dont know whether x is a variable or metod .
+ this is called uniform access  , class user doesnt care about it
+ 
+ 
+infix Notation
+	x op y is same as of x.op(y)
+	
+1 to 10 map (3 * _ ) filter (_ % 5 ==2)  is same as of (1 to 10).map (3 * _ ).filter (_ % 5 ==2)
+
+operator ends with : are right associtives 
+
+1 :: 2 :: 3 :: Nil => which means ( 1:: (2  :: (3 :: Nil))) = > First nill then 3 ten 2 ten 1 will be added
+
+
+Objects and  Companinion Objects 
+
+val a = List (1,2,3) 
+we are actually calling the List without new Keyword how ?
+
+List class will have a companinion object as of same name and a apply metod.
+
+Companinion objects will ave the same name as of the object name . they can access each other
+
+if we use companinion object and apply  method we can call the class without using the new Keyword . 
+  
+
+
+
+ 
 
 
 
