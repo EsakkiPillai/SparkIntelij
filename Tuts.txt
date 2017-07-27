@@ -147,13 +147,107 @@ res4: List[Int] = List(1, 1)
  
 
 
+varargs
+
+def sum(x:Int*) = {
+	var result =0
+	for( rg <- args ) result +=rg
+	result
+	}
+
+sum(1,2,3,45)
+
+if i put 
+sum(1 to 10) 
+it will throw some error inorder to overcome that we are using :_*
+
+so sum ( 1to10 :_*) which will tell consider this as sequence of Something
+
+we need this for recursive type of functions 
+
+def sumrev ( x :Int*) = {
+	if(x.length==0) 0
+	else x.head + sumrev(x.tail :_*)
+	}
 
 
 
 
+get the Vowels from the String 
+
+if we found a vowel give it back to me 
 
 
+def vowelsyield(str:String) =
+    for (x <-str if isvowel3(x) ) yield x
 
+	this above  lines will do the trick for us 
+IN JAVE/ SCALA  we have to use the below code 
+
+def vowels(s:String) = {
+  val str = s.toLowerCase()
+  var result:String = " "
+  for( x <- str)  {
+    if (isvowel3(x) )
+      result += x
+  }
+  result
+}
+
+ 
+ 
+ ===================================================================================================================================================================
+ 
+ 
+ Arrays
+ 
+ val a = new Array[Int] (10)  ten integers will be created as of zero values 
+ 
+ 
+ val a = new Array("Helli" ,"World")   // it will be type infered automatically to Strings 
+ 
+ we use parantheses to access the values a(4)
+ 
+ To traverse the array  we have to use the for loop 
+ 
+ for( elemnet <- a)
+
+ 1 to 5  1 2 3 4 5
+ 1 until 5 1 2 3 4
+ 
+ 
+ 
+ 
+ Scala arrays are mapped to java array in VM  when we have array (Int) it will be transformed into the int[] primitive type of java 
+ 
+ Once an array have been declared we can change the size of the Array 
+ but in scala we can change the length of the array 
+	
+		Array Buffer 
+		import scala.collection.mutable.arrayBuffer
+		vl b = new ArrayBuffer[Int]
+ 
+In Scala we mormally transform one array into Another 
+ 
+ Map is a Collection of pairs ("alice" ,11)
+ 
+ for yield will have the dame data type as of it iterates 
+ 
+ 
+ 
+ 
+ 
+ Array Collects the value of same type but Tuples co;;ect the vales of different types
+ 
+ access the element from the tuples 
+ 
+ tup._1
+ 
+ another best approach is 
+ 
+val (_ , sec , thr) = tup      sec: Double = 1.23 thr: String = Esak    // here we are ignoring the first tuple valus 
+ 
+ 
 
 
 
