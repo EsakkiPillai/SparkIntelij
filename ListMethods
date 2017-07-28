@@ -1,3 +1,196 @@
+// we can Create a List in 5 different ways
+
+//Java Way
+val mainList = List(1,2,3)
+
+//Lisp Style
+val ek = 1 :: 2 :: 3 :: 5 :: Nil
+
+// if we want to save different types of Numbers
+val x = List[Number](1, 2.0, 33d, 0x1)
+
+val name = List.fill(5) ("Esak")
+// you can create a new List with the tabulate method of the List class. The tabulate method creates a new List whose elements are created according to the function you supply.
+val xtabulate = List.tabulate(10)( n => n+5)
+
+//Merging name and xtabultae list
+
+val newList = name ::: xtabulate
+//newList: List[Any] = List(Esak, Esak, Esak, Esak, Esak, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14)
+// check the data type of newList which is a Any
+
+// Adding the Element to the List
+val width4 = 4::mainList
+val width42 = 42::mainList
+val shorter = mainList.tail
+
+println("=======================================================================")
+/* Iterating the List using Foreach
+    Full Signature
+        final def foreach[U](f: (A) ⇒ U): Unit
+                  Applies a function f to all elements of this list.
+ */
+
+newList.foreach(println)
+val x1 = List(1,2,3)
+println("=======================================================================")
+/* Filtering the List
+  Filter
+        def filter(p: (A) ⇒ Boolean): List[A]
+             Selects all elements of this traversable collection which satisfy a predicate
+  Take While
+      final def takeWhile(p: (A) ⇒ Boolean): List[A]
+                Takes longest prefix of elements that satisfy a predicate.
+  partition
+        def partition(p: (A) ⇒ Boolean): (List[A], List[A])
+                Partitions this traversable collection in two traversable collections according to a predicate
+                a pair of traversable collections: the first traversable collection consists of all elements that satisfy the predicate p and
+                the second traversable collection consists of all elements that don't.
+                The relative order of the elements in the resulting traversable collections is the same as in the original traversable collection.
+  Find
+      def find(p: (A) ⇒ Boolean): Option[A]
+                Finds the first element of the sequence satisfying a predicate, if any.
+                returns an option value containing the first element in the sequence that satisfies p, or None if none exists.
+DropWhile
+      final def dropWhile(p: (A) ⇒ Boolean): List[A]
+             Drops longest prefix of elements that satisfy a predicate.
+
+ Span
+      final def span(p: (A) ⇒ Boolean): (List[A], List[A])
+            Splits this list into a prefix/suffix pair according to a predicate.
+            Note: c span p is equivalent to (but possibly more efficient than) (c takeWhile p, c dropWhile p),
+            provided the evaluation of the predicate p does not cause any side-effects
+
+splitAt split the List based on the Position
+
+takeWhile() stop evaluation immediately after condition is not met
+filter have to evaluate the whole Stream.
+ */
+
+val num = List(1,2,3,4,5,6,7,8,9,10)
+val even = num.filter( x => x % 2 == 0)
+
+val even2 = num.takeWhile( b => b % 2 == 0)
+val y = num.takeWhile(a => a < 6)
+
+List(0,1, 2, 3, 4).takeWhile( _ % 2 == 0)   //res3: List[Int] = List(0)
+List(0,1, 2, 3, 4).filter( _ % 2 == 0)      //res4: List[Int] = List(0, 2, 4)
+
+println("Partition")
+val numbers = List.range(0,10).partition( x => x%2 == 0)
+
+println("Find")
+
+
+
+
+println("Exists")
+even.exists( x => x==2)
+// Checking Multiple Comnditions
+even.exists { x =>( x==2 && x==6 )}
+println("Drop While ")
+val drop6 = num.dropWhile( x => x != 6)
+
+/*
+tail: List[A]
+    Selects all elements except the first.
+    Note: might return different results for different runs,
+    unless the underlying collection type is ordered.
+
+ */
+// Getting the Elements from the List
+num.head
+num.headOption
+num.init
+num.last
+num.lastOption
+num.tail
+
+
+val numm = List(22,1,2,44,5,8,6,0,44)
+println("span Examples")
+val spana7  =numm.span(_ > 8)
+spana7
+
+
+val splitAt2 = numm.splitAt(3)
+
+val women = List("Kim", "Julia")
+val men = List("Al", "Terry","Esak")
+
+val couples = women zip men
+
+println("Learn scala- CH08 ")
+// Collections
+//
+val l = List(1,2,3,4,5)
+val l1 = List(1,2)
+// multiply the list by 5
+l.map(x => x*5)
+// we can simplify the above by using the _ which means _ will be replaced by all the values in the List
+l.map( _*5)
+// reduce
+l1.map( x =>  x*5).reduce((total,ele) => total * ele)
+// we can rewrite the same as below
+l1.map(x => x*5).reduce(_*_)
+// when the Mpa logic is of multiple lines we have to open the {} and it should return some
+l1.map( p => {
+    val r = p
+  (r,r*r)
+})
+
+// min of the List
+l1.reduce(_ max _)
+// Creating the Collections od orders
+
+//defining the case class for the table Orders
+case class Order(
+                  orderId: Int,
+                  orderDate: String,
+                  orderCustomerId: Int,
+                  orderStatus: String
+                  )
+
+val os = List(
+  ( Order(1, "2017-01-01", 100, "COMPLETE")),
+  ( Order(2, "2017-01-01", 20, "CLOSED")),
+  ( Order(3, "2017-01-01", 301, "PENDING")),
+  ( Order(4, "2017-01-01", 202, "CLOSED")),
+  ( Order(5, "2017-01-01", 3013, "COMPLETE"))
+)
+
+
+
+os.filter(_.orderStatus == "COMPLETE")
+// if we want to read the file we have to inport the Below statement
+import scala.io.Source
+var fileName = "C://Users//1532894//Desktop//New_REsults//SME_KRI1.sql"
+val sc = Source.fromFile(fileName)
+// sc will always return the BufferedSource  as above
+val src = Source.fromFile(fileName).getLines
+src.take(5).foreach(println)
+//src.map(x => x.split(" ")(2)).foreach(println)
+val s = "1,2017-01-01,100,COMPLETE"
+s.length
+s.substring(4)
+s.substring(3,7)
+s.split(",")(1).split("-")(0)
+// Sorting the data  Sortby SortWith sorted
+// Sort the data by customer status
+os.sortBy( x => x.orderCustomerId).foreach( println )
+println("in Descending Order")
+os.sortBy( x => -x.orderCustomerId).foreach( println )
+println("---Group By ")
+
+os.groupBy( o => o.orderStatus)
+
+val l21 = List(1,2,3,66,77,22,0,1,23,12,4)
+l21.sorted
+// These are have implicit ordering class so that we can use it
+// Check how to implict ordering for a custom class
+//SortWith
+
+
 /* Fold method - it takes 2 parameter
                   one for the accumulator
                   two it take the Functions
