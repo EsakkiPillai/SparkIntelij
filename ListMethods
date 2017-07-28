@@ -1,0 +1,265 @@
+/* Fold method - it takes 2 parameter
+                  one for the accumulator
+                  two it take the Functions
+
+  */
+
+
+val foldExample = List( 1,2,3,4,5)
+foldExample.foldLeft(0)((x,y) => x +y )
+val summ = foldExample.foldLeft(0) ( _ + _)
+
+// in the Above Example fold Left will take the First value for the end results
+// Function  will take the first value from the accumulator and second parameter from the List
+// during the next iteration this result will be given as the first parameter and the next element from the list will act as the second parameter and this cycle goes upto the end of the list
+// we can rewrite the above statement in to foldExample.foldLeft(0) ( _ + _) , which is mostly used by the scala dev
+val mult = foldExample.foldLeft(1)( (res,x) => res * x )
+
+ case class emp (val fname:String , val Lname:String , val age:Int , val salary:Int ,val sex:String)
+
+val fooList =  emp("Esak","--",26,123,"male") ::  emp("arun","kumar",28,225,"male")::  emp("bala","--",35,299,"male") :: Nil
+
+//And we want to turn it into a list of strings in the format of [title] [name], [age]
+
+val Listemp = fooList.foldLeft(List[String]()) { (res,f) =>
+  val title = f.sex match {
+    case "male" => "MR."
+    case "female"=> "MS"
+  }
+  val s = title+" "+f.fname+"_"+f.age
+  res :+s
+}
+
+Listemp(1)
+
+// reduceLeft is a special case of foldLeft
+//When you call reduceLeft say on a List[Int] it will literally reduce the whole list of integers into a single value, which is going to be of type Int (or a supertype of Int, hence [B >: A]).
+// When you call foldLeft say on a List[Int] it will fold the whole list (imagine rolling a piece of paper) into a single value, but this value doesn't have to be even related to Int (hence [B]).
+// s
+
+val numbers = List ( 1,2 ,3 ,4,5,6,7,8,9)
+val number_iteration = numbers.foldLeft((0,0)) {
+  (result,f)=> (result._1 + f ,result._2 + 1)
+}
+
+def listWithSum(numbers: List[Int]) = numbers.foldLeft((List[Int](), 0)) {
+  (resultingTuple, currentInteger) =>
+    (currentInteger :: resultingTuple._1, currentInteger + resultingTuple._2)
+}
+
+listWithSum(List(1,2,3,4,5,6,7,8,9,10))    //  res2: (List[Int], Int) = (List(10, 9, 8, 7, 6, 5, 4, 3, 2, 1),55)
+
+//This method takes a List[Int] and returns a Tuple2[List[Int], Int] or (List[Int] -> Int). It calculates the sum and returns a tuple with a list of integers and it's sum.
+// By the way the list is returned backwards, because we used foldLeft instead of foldRight
+
+
+val example = List (1,2,3,4,5,6,7,8,9,10)
+val newExample = {
+  if (example.isEmpty) 1::example
+  else
+    example.tail
+}
+
+/*Count the list of values which were satisfied by the condition
+def count(p: (A) ⇒ Boolean): Int
+Counts the number of elements in the traversable or iterator which satisfy a predicate.
+p the predicate used to test elements.
+returns the number of elements satisfying the predicate p.*/
+
+example.count(_ >3)
+val fruits = List("Apples","Oranges","Apples","bananna","Oranges","Apples","fig")
+val fruits_distinct = fruits.distinct
+val fruits_count = fruits.count( _.length < 4)
+val fruits_upper = fruits.map(_.toUpperCase)
+val fruits_lower = fruits.map(_.toLowerCase)
+// Index Operations
+val fruits_index_apple = fruits.indexOf("fig")
+val toppings = Seq("black olives", "pepperoni", "pepperoni")
+val toppings_pepp = toppings.filter(rec => rec=="pepperoni")
+val toppings_notpepperoni = toppings.filterNot( rec => rec.equalsIgnoreCase("pepperoni"))
+// to Flatten the List
+val newList = toppings :: fruits
+// Slicing the List
+
+// fruits    res4: List[String] = List(Apples, Oranges, Apples, bananna, Oranges, Apples, fig)
+fruits.slice(2,4)
+// List Basic operations
+
+/*
+Format specifier   Description
+----------------   ---------------------------------
+%c           Character
+%d           Decimal number (integer, base 10)
+%e           Exponential floating-point number
+%f           Floating-point number
+%i           Integer (base 10)
+%o           Octal number (base 8)
+%s           A string of characters
+%u           Unsigned decimal (integer) number
+%x           Hexadecimal number (base 16)
+%%           Print a “percent” character
+\%           Print a “percent” character
+
+*/
+
+
+val fruitheader = fruits.head
+println("\n %s is the first element in the list %s ".format(fruitheader, fruits) )
+println(" \n\n %s is the remaining elements - it will omit the last element  in the list %s".format(fruits.init,fruits) )
+println("\n %s is the last element in the List { %s }".format(fruits.last ,fruits) )
+val fr = List("Apples","Oranges","Apples","bananna","Oranges","Apples","fig")
+
+val totalele =  fr.productArity
+val second_fr = fr.productElement(0)
+fr.productPrefix
+val reverse_fr = fr.reverse
+fr.zipWithIndex
+val mapList =  emp("Esak","--",56,123,"male") ::  emp("arun","kumar",28,525,"male")::  emp("bala","--",35,299,"male") :: Nil
+println("Sort By age")
+val agewise = mapList.sortBy(_.age)
+println("Sort By Salary in ascending ")
+val salaryWise = mapList.sortBy(_.salary)
+println("Sort By Salary in descending ")
+val salaryWise_desceasy = mapList.sortBy(-_.salary)
+val salarywise_desc = mapList.sortBy(_.salary).reverse
+// How to Sort a Sequence in Scala except Array
+/*
+sorting in scala
+  sortBy
+  sortWith - SortWith method allows us to write our own sorting logic
+  sorted   - Sorted method can be used to sort collections with type Double Float Int and any other data type that has an implicit scala.math.ordering
+*/
+val demo = List(11,2,-1,1,2,3,4,5)
+val sorted_Default = demo.sorted
+val sorted_def_rev = demo.sorted.reverse
+val demoStr = List("banana", "pear", "apple", "orange")
+demoStr.sorted
+val sort_by_length = demoStr.sortWith(_.length > _.length)
+
+def sortWith_length(s1:String , s2:String) ={
+  println("comparing %s and %s".format(s1, s2))
+  s1.length > s2.length
+}
+val custom_sortWith = List("banana", "pear", "apple", "orange").sortWith(sortWith_length)
+val custom_sortWith2 = List("banana", "pear", "apple", "orange").sortWith(sortWith_length(_ , _))
+// Lets Declare the Person class and sort the Elements
+// we are extending the ordered trait inorder to use the sorted method  we use age as the base
+//
+class person(val name:String,val  Aid:Int , val age:Int )  {
+    override def toString() = { "person("+name+","+Aid+","+ age+")"
+    }
+  // if we want to use the sorted method we have to exyends the ordered trait to this person class and implement a compare method
+ // def compare (that: Person) = this.age - that.age
+// {
+//    if(this.age == that.age)      0
+//    else if (this.age > that.age) 1
+//    else                         -1
+//  }
+}
+val obj = List(new person("esakki",1234,24) , new person("Rocko",99999,26), new person("Sachin",4123,29))
+val person_age = obj.sortWith(_.age >  _.age)
+case class Row(var firstName: String, var lastName: String, var city: String)
+var rows = List(new Row("Oscar", "Wilde", "London"),
+  new Row("Otto",  "Swift", "Berlin"),
+  new Row("Carl",  "Swift", "Paris"),
+  new Row("Hans",  "Swift", "Dublin"),
+  new Row("Hugo",  "Swift", "Sligo"))
+// Sort By Last Name ( one Field)
+rows.sortBy(_.lastName)
+val sort_with_fname = rows.sortWith(_.firstName > _.firstName)
+val sor_by_fname = rows.sortBy(_.firstName )
+// Sort By two values
+val sort_by_twoValues = rows.sortBy(r => (r.lastName,r.firstName))
+/*
+    ZIP
+    ZIP ALL
+    ZIPWITHINDEX
+ */
+
+
+val days = Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
+
+for ((day, count) <- days.zipWithIndex) {
+  println(s"$count is $day")
+}
+val days123 = List("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
+val symbols123 = List(0,1,2,3,4,5,6)
+val zipper = days123 zip symbols123
+
+val a = ( 1 to 5).toSeq
+val b = (3 to 9).toSeq
+println("union of a and b is %s ".format(a.union(b)) )
+println("Interrsect  of a and b is %s ".format(a.intersect(b)) )
+println("Difference  of a , which is available in a but not in b  %s ".format(a.diff(b)) )
+println("Difference  of b , which is available in b but not in a  %s ".format(b.diff(a)) )
+
+// Unzip the zipper variable
+// def unzip[A1, A2](implicit asPair: (A) ⇒ (A1, A2)): (List[A1], List[A2])
+val xs = zipper.unzip
+xs(1)
+
+/* First of all Thanks to Diego's reply which helped me connect the dots in understanding aggregate() function..
+
+Let me confess that I couldn't sleep last night properly because I couldn't get how aggregate() works internally, I'll get good sleep tonight definitely :-)
+
+Let's start understanding it
+
+val result = List(1,2,3,4,5,6,7,8,9,10).par.aggregate((0, 0))
+         (
+          (x, y) => (x._1 + y, x._2 + 1),
+          (x,y) =>(x._1 + y._1, x._2 + y._2)
+         )
+result: (Int, Int) = (55,10)
+aggregate function has 3 parts :
+initial value of accumulators : tuple(0,0) here
+seqop : It works like foldLeft with initial value of 0
+combop : It combines the result generated through parallelization (this part was difficult for me to understand)
+Let's understand all 3 parts independently :
+
+part-1 : Initial tuple (0,0)
+Aggregate() starts with initial value of accumulators x which is (0,0) here. First tuple x._1 which is initially 0 is used to compute the sum, Second tuple x._2 is used to compute total number of elements in the list.
+part-2 : (x, y) => (x._1 + y, x._2 + 1)
+If you know how foldLeft works in scala then it should be easy to understand this part. Above function works just like foldLeft on our List(1,2,3,4...10).
+Iteration#      (x._1 + y, x._2 + 1)
+     1           (0+1, 0+1)
+     2           (1+2, 1+1)
+     3           (3+3, 2+1)
+     4           (6+4, 3+1)
+     .             ....
+     .             ....
+     10          (45+10, 9+1)
+thus after all 10 iteration you'll get the result (55,10). If you understand this part the rest is very easy but for me it was the most difficult part in understanding if all the required computation are finished then what is the use of second part i.e. compop - stay tuned :-)
+
+part 3 : (x,y) =>(x._1 + y._1, x._2 + y._2)
+
+Well this 3rd part is combOp which combines the result generated by different threads during parallelization, remember we used 'par' in our code to enable parallel computation of list :
+
+List(1,2,3,4,5,6,7,8,9,10).par.aggregate(....)
+
+Apache spark is effectively using aggregate function to do parallel computation of RDD.
+
+Let's assume that our List(1,2,3,4,5,6,7,8,9,10) is being computed by 3 threads in parallel. Here each thread is working on partial list and then our aggregate() combOp will combine the result of each thread's computation using the below code :
+
+(x,y) =>(x._1 + y._1, x._2 + y._2)
+Original list : List(1,2,3,4,5,6,7,8,9,10)
+
+Thread1 start computing on partial list say (1,2,3,4), Thread2 computes (5,6,7,8) and Thread3 computes partial list say (9,10)
+
+At the end of computation, Thread-1 result will be (10,4), Thread-2 result will be (26,4) and Thread-3 result will be (19,2).
+
+At the end of parallel computation, we'll have ((10,4),(26,4),(19,2))
+
+Iteration#      (x._1 + y._1, x._2 + y._2)
+     1           (0+10, 0+4)
+     2           (10+26, 4+4)
+     3           (36+19, 8+2)
+which is (55,10).
+
+Finally let me re-iterate that seqOp job is to compute the sum of all the elements of list and total number of list whereas combine function's job is to combine different partial result generated during parallelization.
+
+I hope above explanation help you understand the aggregate().
+
+*/
+
+
+
