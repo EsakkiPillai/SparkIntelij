@@ -131,6 +131,15 @@ mp.filterKeys( x => x<3)
 mp.mapValues( o => (o.orderDate,o.orderStatus))
 
 
+// tuples used to store all the values
+
+//scala> val tups = (1,333.44 ,"Esakki")
+//tups: (Int, Double, String) = (1,333.44,Esakki)
+//
+//scala> tups.
+//  _1   canEqual   hashCode       productElement    toString
+//_2   copy       invert         productIterator   x
+//_3   equals     productArity   productPrefix     zipped
 
 
 
