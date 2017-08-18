@@ -18,22 +18,26 @@ libraryDependencies += "org.apache.spark" % "spark-core_2.10" % "1.6.3"
 
 // https://mvnrepository.com/artifact/org.apache.spark/spark-sql_2.10
 libraryDependencies += "org.apache.spark" % "spark-sql_2.10" % "1.6.3"
+// Adding Dependency for SparkSQl Hive
+libraryDependencies += "org.apache.spark" % "spark-hive_2.10" % "1.6.3"
+
+// https://mvnrepository.com/artifact/org.apache.spark/spark-streaming_2.10
+libraryDependencies += "org.apache.spark" % "spark-streaming_2.10" % "1.6.3"
+
+// Log 4j Dependency
+libraryDependencies += "log4j" % "log4j" % "1.2.14"
+
+//mysql Connector Dependency
+libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.36"
 
 
 
-//libraryDependencies += "org.apache.spark" % "spark-hive_2.10" % "1.6.3"
-//
-//// https://mvnrepository.com/artifact/org.apache.spark/spark-streaming_2.10
-//libraryDependencies += "org.apache.spark" % "spark-streaming_2.10" % "1.6.3"
-//
 //libraryDependencies += "org.apache.spark" % "spark-streaming-flume_2.10" % "1.6.3"
 //
 //libraryDependencies += "org.apache.spark" % "spark-streaming-flume-sink_2.10" % "1.6.3"
 //
 //libraryDependencies += "org.apache.spark" % "spark-streaming-kafka_2.10" % "1.6.3"
 
-//mysql Connector Dependency
-libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.36"
 
 
 
